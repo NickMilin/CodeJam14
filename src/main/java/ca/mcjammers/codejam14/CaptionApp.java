@@ -22,10 +22,12 @@ public class CaptionApp extends Application {
         primaryStage.setTitle("Caption Input App");
 
         // Create UI elements
-        Label instructionLabel = new Label("Enter your caption:");
+        Label instructionLabel = new Label("Enter your Lecture Captions:");
         instructionLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
         TextArea captionArea = new TextArea();
+        captionArea.setWrapText(true);
         captionArea.setPrefRowCount(4);
+        captionArea.setPrefWidth(100);
         Button submitButton = new Button("Submit");
         Label displayLabel = new Label();
         displayLabel.setStyle("-fx-font-size: 14px;");
