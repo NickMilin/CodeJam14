@@ -35,9 +35,10 @@ javafx {
 }
 
 dependencies {
-
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
-    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+    implementation('com.googlecode.json-simple:json-simple:1.1.1') {
+        exclude group: 'org.hamcrest', module: 'hamcrest-core'
+    }
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }

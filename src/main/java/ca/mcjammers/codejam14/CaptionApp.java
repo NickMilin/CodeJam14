@@ -15,6 +15,17 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class CaptionApp extends Application {
 
     @Override
@@ -46,7 +57,7 @@ public class CaptionApp extends Application {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create("https://api.openai.com/v1/chat/completions"))
                     .header("Content-Type", "application/json")
-                    .header("Authorization", "Bearer <key>>")
+                    .header("Authorization", "Bearer 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")
                     .POST(HttpRequest.BodyPublishers.ofString(json)) // Default is GET
                     .build();
 
@@ -56,6 +67,11 @@ public class CaptionApp extends Application {
                 JsonNode responseJson = mapper.readTree(response.body());
                 content = responseJson.asText();
 
+
+                JSONParser parser = new JSONParser();
+                Object obj  = parser.parse(String.valueOf(response));
+
+
                 System.out.print(content);
 
                 // Print the response status code and body
@@ -64,6 +80,8 @@ public class CaptionApp extends Application {
 
             } catch (IOException | InterruptedException err) {
                 err.printStackTrace();
+            } catch (ParseException ex) {
+                throw new RuntimeException(ex);
             }
 
             if (caption.trim().isEmpty()) {
