@@ -46,7 +46,7 @@ public class CaptionApp extends Application {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create("https://api.openai.com/v1/chat/completions"))
                     .header("Content-Type", "application/json")
-                    .header("Authorization", "Bearer <key>>")
+                    .header("Authorization", "Bearer <key>")
                     .POST(HttpRequest.BodyPublishers.ofString(json)) // Default is GET
                     .build();
 
@@ -54,7 +54,7 @@ public class CaptionApp extends Application {
                 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
                 JsonNode responseJson = mapper.readTree(response.body());
-                content = responseJson.asText();
+                content = responseJson.path("choices").get(0).path("message").path("content").asText();
 
                 System.out.print(content);
 
