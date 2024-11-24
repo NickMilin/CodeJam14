@@ -5,6 +5,11 @@ module ca.mcjammers.codejam14 {
     requires com.fasterxml.jackson.databind;
     requires java.desktop;
     requires javafx.web;
+    requires html2pdf;
+    requires org.slf4j;
+    requires layout;
+    requires kernel;
+    requires io;
 
 
     opens ca.mcjammers.codejam14 to javafx.fxml;

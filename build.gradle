@@ -26,7 +26,7 @@ tasks.withType(JavaCompile) {
 
 application {
     mainModule = 'ca.mcjammers.codejam14'
-    mainClass = 'ca.mcjammers.codejam14.HelloApplication'
+    mainClass = 'ca.mcjammers.codejam14.CaptionApp'
 }
 
 javafx {
@@ -36,6 +36,9 @@ javafx {
 
 dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    implementation 'com.itextpdf:html2pdf:6.0.0'
+    implementation 'org.slf4j:slf4j-api:1.7.36'
+    implementation 'org.slf4j:slf4j-simple:1.7.36' // Or another SLF4J binding like logback
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 
