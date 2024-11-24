@@ -194,7 +194,7 @@ public class CaptionApp extends Application {
         vbox.setAlignment(Pos.TOP_CENTER);
 
         // Set up the scene and stage
-        Scene scene = new Scene(vbox, 1000, 900);
+        Scene scene = new Scene(vbox, 1000, 850);
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image("icon.png"));
         primaryStage.show();
