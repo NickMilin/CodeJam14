@@ -16,6 +16,7 @@ import com.itextpdf.layout.Document;
 import com.itextpdf.layout.font.FontProvider;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.Event;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -25,6 +26,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -73,12 +75,22 @@ public class CaptionApp extends Application {
             // Show progress alert
             ProgressBar progressBar = new ProgressBar();
             progressBar.setPrefWidth(300);
-            Alert progressAlert = new Alert(Alert.AlertType.INFORMATION);
+
+            Stage progressAlert = new Stage();
             progressAlert.setTitle("Generating Summary");
-            progressAlert.setHeaderText(null);
-            progressAlert.setContentText("Lecture summary being created. Please wait...");
-            progressAlert.getDialogPane().setContent(new VBox(10, new Label("Lecture summary being created. Please wait..."), progressBar));
-            progressAlert.getDialogPane().setPadding(new Insets(20));
+            progressAlert.initModality(Modality.APPLICATION_MODAL); // Block interaction with other windows
+            progressAlert.setResizable(false);
+
+            VBox progressBox = new VBox(10, new Label("Lecture summary being created. Please wait..."), progressBar);
+            progressBox.setPadding(new Insets(20));
+            progressBox.setAlignment(Pos.CENTER);
+
+            Scene progressScene = new Scene(progressBox);
+            progressAlert.setScene(progressScene);
+            // Prevent closing the dialog
+            progressAlert.setOnCloseRequest(Event::consume);
+
+            // Show the progress stage
             Platform.runLater(progressAlert::show);
 
             ObjectMapper mapper = new ObjectMapper();
@@ -108,7 +120,7 @@ public class CaptionApp extends Application {
             ObjectNode userMessage = mapper.createObjectNode();
 
             systemMessage.put("role", "system");
-            systemMessage.put("content", "You are an expert academic assistant tasked with creating ultra-detailed summaries of lecture transcripts... (detailed instructions)");
+            systemMessage.put("content", "You are an expert academic assistant tasked with creating ultra-detailed summaries of lecture transcripts. Your summaries should be so complete and thorough that they serve as a full substitute for attending or watching the lecture. Follow these detailed instructions: - Comprehensive Content Coverage: Transcribe every piece of technical information, example, tip, and detail provided in the lecture. Include all definitions, processes, and methods, ensuring that every point made by the professor is captured in full. Retain and clarify even minor asides, comments, or tips that might aid understanding or reinforce the material. - Detailed Example Expansion: For every example provided in the lecture, give a step-by-step breakdown of how it is used to illustrate the concept. Document every step in calculations, derivations, or reasoning processes, ensuring nothing is omitted. If any examples include diagrams, describe them in detail and explain their relevance. - Tips and Practical Insights: Note every small piece of advice, tip, or trick shared by the professor, even if it seems minor. Highlight these tips separately for easy identification and use in study or application. - Accurate Contextualization: Capture the context of each statement, ensuring that technical terms, references, and ideas are fully explained. Make the summary self-contained by filling in gaps where a lecture might assume prior knowledge.- Organized Structure and Flow: Follow the flow of the lecture, maintaining a clear structure with headings, subheadings, and logical divisions for topics and examples. Present content in a clean, hierarchical format that mirrors the professor’s organization. - Study-Oriented Detailing: At the end of the summary, provide a recap of all critical takeaways, tips, and practical applications. Include a glossary of any technical terms or concepts introduced. Add a list of key questions, exercises, or prompts to aid the student in studying the material further. - Instructional Clarity: Avoid paraphrasing in ways that sacrifice clarity or technical accuracy. Instead, ensure every sentence is an accurate and detailed reflection of the professor’s teaching. Use explanatory language to make technical details as clear and accessible as possible. The result should be an in-depth and meticulously detailed summary that serves as a complete substitute for watching or attending the lecture. Users should be able to rely solely on your summary for mastering the material. Generate your answer completely in html. Only and only generate a HTML compatible output. Make your response look nice with fancy html functions. For equations, use the html <code> class. Write symbols without latex notation. Generate the body with no margin");
             userMessage.put("role", "user");
             userMessage.put("content", caption);
 
