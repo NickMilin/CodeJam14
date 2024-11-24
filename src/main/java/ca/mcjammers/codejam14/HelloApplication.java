@@ -50,6 +50,7 @@ public class HelloApplication extends Application {
         Button downloadButton = new Button("Download");
 
 
+
         // Create WebView for LaTeX rendering
         WebView webView = new WebView();
         WebEngine webEngine = webView.getEngine();

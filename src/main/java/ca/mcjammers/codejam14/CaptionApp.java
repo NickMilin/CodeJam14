@@ -42,7 +42,7 @@ public class CaptionApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Lecture Caption Summary Generator");
+        primaryStage.setTitle("QuickNotes AI");
 
         // Create UI elements
         Label instructionLabel = new Label("Enter your Lecture Captions:");
@@ -57,8 +57,8 @@ public class CaptionApp extends Application {
         Button downloadButton = new Button("Download PDF");
 
         // Style buttons
-        submitButton.setStyle("-fx-font-size: 14px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 10px 20px;");
-        downloadButton.setStyle("-fx-font-size: 14px; -fx-background-color: #2196F3; -fx-text-fill: white; -fx-padding: 10px 20px;");
+        submitButton.setStyle("-fx-font-size: 14px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 10px 20px; -fx-cursor: hand;");
+        downloadButton.setStyle("-fx-font-size: 14px; -fx-background-color: #2196F3; -fx-text-fill: white; -fx-padding: 10px 20px; -fx-cursor: hand;");
 
         // Create WebView for HTML rendering
         WebView webView = new WebView();
