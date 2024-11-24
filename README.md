@@ -10,6 +10,6 @@ Click on the gradle icon on the right side of the screen.
 
 Navigate to Tasks > application > run
 
-<img width="1624" alt="Screenshot 2024-11-24 at 10 55 53 AM" src="https://github.com/user-attachments/assets/6d17836c-6622-43c3-abf2-4b3556b655bb">
+Then click on run to launch the program.
 
-Click on run
+<img width="1624" alt="Screenshot 2024-11-24 at 10 55 53 AM" src="https://github.com/user-attachments/assets/6d17836c-6622-43c3-abf2-4b3556b655bb">
